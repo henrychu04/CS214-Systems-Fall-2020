@@ -1,0 +1,46 @@
+testA:
+	Allocates one byte and freeing it immediately 120 times
+testB:
+	Allocates 120 bytes individually then freeing each byte individually
+testC:
+	Randomly malloc or free 1 byte until 120 bytes are allocated then free all the pointers once 120 bytes are allocated
+testD:
+    1. Allocate 120 bytes individually
+    2. Free the second fourth of allocated memory
+    3. Allocate 10 bytes 120 / 4 times
+    4. Free each pointer in the order of storage
+
+Mainly to test allocating at different parts in memory and merging unused parts of memory
+
+With the way that this test is set up, here is a graphic representation of what is allocated in memory
+
+| = allocated memory
+_ = free memory
+
+1.
+ ||||| ||||| ||||| ||||| ______ ...
+   ^     ^     ^     ^
+ Allocate 1 byte each time
+2.
+ ||||| _____ ||||| ||||| ______ ...
+         ^
+ Free only this part in memory
+3.
+ ||||| ||||| ||||| ||||| ||||| ... _____ ...
+         ^                 ^
+ Allocate 10 bytes each time
+4.
+ a.
+     _____ ||||| ||||| ||||| ||||| ... _____ ...
+       ^
+     Free the first fourth in storage
+ b.
+     _____ _____ ||||| ||||| _____ ...
+             ^                 ^
+     Free the second fourth in storage
+ c.
+     _____ _____ _____ _____ ...
+     Everything is now freed
+
+testE:
+	Allocates 120 bytes of memory then free it from the center to the end then from the start to the center

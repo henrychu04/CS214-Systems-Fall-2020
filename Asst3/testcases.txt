@@ -1,0 +1,18 @@
+The following are the correct inputs to successfully complete a knock knock joke:
+
+REG|12|Who's there?|
+REG|11|Kanga, who?|
+REG|4|Ahh!|
+
+If the order or message of the above messages do not match, the server will throw an error
+
+The following are valid error messages that will stop the server:
+
+ERR|M0CT|
+ERR|M3LN|
+
+The following will throw errors:
+
+REG|11|Who's there?|
+REG|13|Who's there?|
+REE|12|Who's there?|
